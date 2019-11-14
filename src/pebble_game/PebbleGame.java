@@ -5,6 +5,9 @@ public class PebbleGame {
     public static String dummyRange = "1,2,3,4,5,6,7,8,9,10";
 
     class Pebble {
+    /*
+    Pebble, when instantiated represents a pebble, holding its weight and the bag it is in
+    */
         private String bagName;
         private String weight;
 
@@ -25,6 +28,10 @@ public class PebbleGame {
     }
 
     static class Player {
+        /*
+        Player takes input nothing when instantiated, but holds the name of the player.
+        This is just a demonstration of how we may deal with the user inputing the number of players playing.
+        */
         private String name;
 
         public Player() {
