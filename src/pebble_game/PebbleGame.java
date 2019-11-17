@@ -6,9 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+
 public class PebbleGame {
 
     public static class pebbleGame {
+    /*this class basically starts the game, initializes bags and loads them*/
 
         static int noPlayers = 0;
 
@@ -22,44 +24,47 @@ public class PebbleGame {
 
         static void createBlackBags() {
             // initailse the scanner
-            Scanner in = new Scanner(System.in); // need to close this
+            Scanner in = new Scanner(System.in);
 
-            while (noPlayers < 0) {
+            while (noPlayers == 0) {
+                while(true){
+                    System.out.println("Please enter the number of players: ");
+                    noPlayers = in.nextInt();
 
-                System.out.println("Please enter the number of players: ");
-                noPlayers = in.nextInt();
-
-                if (noPlayers < 0) {
-                    System.out.println("Please enter a positive number of players");
-                }
-
-                if (noPlayers == 0) {
-                    System.out.println("The number of players can't be 0");
+                    if (noPlayers > 0) {
+                        System.out.println("Okay");
+                        break;
+                    }
+                    else if (noPlayers <= 0) {
+                        System.out.println("Please enter a positive number of players");
+                        break;
+                    }
                 }
             }
             
-            //Maybe loop this, may need a list of [X,Y,Z] anyway, for the picking of random bags
             String fileName;
-            System.out.println("Please enter the location of the first bag");
-            fileName = in.nextLine();
-            X = loadBlackBags(X, noPlayers, fileName);
+                System.out.println("Please enter the location of the first bag");
+                fileName = in.next();
+                X = loadBlackBags(X, noPlayers, fileName);
+                
+                System.out.println("Please enter the location of the second bag");
+                fileName = in.next();
+                Y = loadBlackBags(Y, noPlayers, fileName);
 
-            System.out.println("Please enter the location of the second bag");
-            fileName = in.nextLine();
-            Y = loadBlackBags(Y, noPlayers, fileName);
-
-            System.out.println("Please enter the location of the third bag");
-            fileName = in.nextLine();
-            Z = loadBlackBags(Z, noPlayers, fileName);
+                System.out.println("Please enter the location of the third bag");
+                fileName = in.next();
+                Z = loadBlackBags(Z, noPlayers, fileName);
+                
+            in.close();
         }
+        
 
+        // static void whiteBags() {
 
-        //static void whiteBags() {
-
-        //}
+        // }
 
         //static void givePlayersPebbles(){
-            //give player 10 pebbles from random bags
+            //give player 10 pebbles from random bags and then remove them from black bags
         //}
 
         /*
@@ -68,8 +73,6 @@ public class PebbleGame {
             If a black bag is full
 
         */
-        
-
     }
 
 
@@ -81,11 +84,10 @@ public class PebbleGame {
         return list;
     }
 
-    private static Integer[] getWeights(String fileName) { // needs checking
+    private static Integer[] getWeights(String fileName) { //works
         ArrayList<Integer> weights = new ArrayList<>();
-
         try{
-            BufferedReader reader = new BufferedReader(new FileReader(fileName)); //need to close  this
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line = null;
             
             while ((line = reader.readLine()) != null) {
@@ -95,9 +97,11 @@ public class PebbleGame {
                     weights.add(Integer.parseInt(tokens[i].trim()));
                 }
             }
+            reader.close();
 
         } catch (FileNotFoundException e) {
             System.out.println(e);
+
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -146,10 +150,10 @@ public class PebbleGame {
 
     }
 
-    public void main(String[] args) throws Exception {
-        System.out.println("Please enter the location of bag number 0 to load: ");
+    public static void main(String[] args) throws Exception {
         // create threads here
-        
+        pebbleGame.createBlackBags();
+
     }
 
 }
