@@ -12,17 +12,57 @@ public class PebbleGame {
     public static class pebbleGame {
     /*this class basically starts the game, initializes bags and loads them*/
 
-        static int noPlayers = 0;
+        static int noPlayers;
 
         static ArrayList<Integer> X = new ArrayList<Integer>();
         static ArrayList<Integer> Y = new ArrayList<Integer>();
         static ArrayList<Integer> Z = new ArrayList<Integer>();
 
-        ArrayList<Integer> A = new ArrayList<Integer>();
-        ArrayList<Integer> B = new ArrayList<Integer>();
-        ArrayList<Integer> C = new ArrayList<Integer>();
+        static ArrayList<Integer> A = new ArrayList<Integer>();
+        static ArrayList<Integer> B = new ArrayList<Integer>();
+        static ArrayList<Integer> C = new ArrayList<Integer>();
 
-        static void createBlackBags() {
+        // for testing
+        static void loadGame(){
+            X.add(1);
+            X.add(2);
+            X.add(3);
+            X.add(4);
+            X.add(5);
+            X.add(6);
+            X.add(7);
+            X.add(8);
+            X.add(9);
+            X.add(10);
+            X.add(11);
+
+            Y.add(1);
+            Y.add(2);
+            Y.add(3);
+            Y.add(4);
+            Y.add(5);
+            Y.add(6);
+            Y.add(7);
+            Y.add(8);
+            Y.add(9);
+            Y.add(10);
+            Y.add(11);
+
+            Z.add(1);
+            Z.add(2);
+            Z.add(3);
+            Z.add(4);
+            Z.add(5);
+            Z.add(6);
+            Z.add(7);
+            Z.add(8);
+            Z.add(9);
+            Z.add(10);
+            Z.add(11);
+        }
+
+        /*
+        static void loadGame() {
             // initailse the scanner
             Scanner in = new Scanner(System.in);
 
@@ -34,8 +74,7 @@ public class PebbleGame {
                     if (noPlayers > 0) {
                         System.out.println("Okay");
                         break;
-                    }
-                    else if (noPlayers <= 0) {
+                    } else if (noPlayers <= 0) {
                         System.out.println("Please enter a positive number of players");
                         break;
                     }
@@ -43,43 +82,85 @@ public class PebbleGame {
             }
             
             String fileName;
-                System.out.println("Please enter the location of the first bag");
-                fileName = in.next();
-                X = loadBlackBags(X, noPlayers, fileName);
-                
-                System.out.println("Please enter the location of the second bag");
-                fileName = in.next();
-                Y = loadBlackBags(Y, noPlayers, fileName);
+            System.out.println("Please enter the location of the first bag");
+            fileName = in.next();
+            X = loadBlackBags(X, noPlayers, fileName);
+            
+            System.out.println("Please enter the location of the second bag");
+            fileName = in.next();
+            Y = loadBlackBags(Y, noPlayers, fileName);
 
-                System.out.println("Please enter the location of the third bag");
-                fileName = in.next();
-                Z = loadBlackBags(Z, noPlayers, fileName);
+            System.out.println("Please enter the location of the third bag");
+            fileName = in.next();
+            Z = loadBlackBags(Z, noPlayers, fileName);
                 
             in.close();
         }
-        
-
-        // static void whiteBags() {
-
-        // }
-
-        //static void givePlayersPebbles(){
-            //give player 10 pebbles from random bags and then remove them from black bags
-        //}
-
-        /*
-            Need checks for,
-            If someone won
-            If a black bag is full
-
         */
+
+        static void whiteBags(String emptyBagName) {
+            ArrayList<Integer> sisterBag;
+            ArrayList<Integer> emptyBag;
+            System.out.println("the empty bag is " + emptyBagName);
+            if (emptyBagName == "X"){
+                sisterBag = pebbleGame.A;
+                emptyBag = pebbleGame.X;
+            } else if (emptyBagName == "Y"){
+                sisterBag = pebbleGame.B;
+                emptyBag = pebbleGame.Y;
+            } else {
+                sisterBag = pebbleGame.C;
+                emptyBag = pebbleGame.Z;
+            }
+
+            for (int x : sisterBag){
+                emptyBag.add(x);
+            }
+            sisterBag.clear();
+        }
+
+        static void givePlayersPebbles() throws Exception {
+            List<String> blackBags = Arrays.asList("X","Y","Z");
+            ArrayList<Integer> bag;
+            
+            String blackBagName = blackBags.get(getRandomNumberInRange(0, blackBags.size()-1));
+            if (blackBagName == "X") {
+                bag = pebbleGame.X;
+            } else if (blackBagName == "Y") {
+                bag = pebbleGame.Y;
+            } else if (blackBagName == "Z") {
+                bag = pebbleGame.Z;
+            } else {
+                throw new Exception("Error");
+            }
+            for (int i=0; i < 10; i++){
+                int location = getRandomNumberInRange(0, bag.size()-1);
+                Integer item = bag.get(location);
+                player.playersPebbles.add(item);
+                bag.remove(location);
+                player.fromWhere.add(blackBagName);
+            }
+        }
+        
+        static boolean checkPlayerWon() {
+            int sum = 0;
+            for (int i : player.playersPebbles){
+                sum += i;
+            }
+            if (sum == 100 && player.playersPebbles.size() == 10){
+                return true;
+            }
+            return false;
+        }
+
+        
     }
 
 
     private static ArrayList<Integer> loadBlackBags(ArrayList<Integer> list, Integer noPlayers, String list2) { //works 
         Integer[] weights = getWeights(list2);
         for (int i = 0; i < (noPlayers * 11); i++) {
-            list.add(weights[(getRandomNumberInRange(0,weights.length))]);
+            list.add(weights[(getRandomNumberInRange(0,weights.length-1))]);
         }
         return list;
     }
@@ -110,50 +191,149 @@ public class PebbleGame {
     }
 
     private static int getRandomNumberInRange(int min, int max) {
-
-		if (min >= max) {
+        
+		if (min > max) {
 			throw new IllegalArgumentException("max must be greater than min");
 		}
-
+        
 		Random r = new Random();
 		return r.nextInt((max - min) + 1) + min;
     }
     
 
-    public class player extends Thread {
-        ArrayList<Integer> playersPebbles = new ArrayList<Integer>();
-        ArrayList<String> fromWhere = new ArrayList<String>();
-        List<String> blackBags = Arrays.asList("X","Y","Z");
+    public static class player extends Thread {
+        static ArrayList<Integer> playersPebbles = new ArrayList<Integer>();
+        static ArrayList<String> fromWhere = new ArrayList<String>();
 
-        void getPebbles(){
-            String bag = blackBags.get(getRandomNumberInRange(0,blackBags.size()));
-            if (bag == "X") {
-                playersPebbles.add(pebbleGame.X.get(getRandomNumberInRange(0,pebbleGame.X.size()))); 
-            } else if (bag == "Y") {
-                playersPebbles.add(pebbleGame.Y.get(getRandomNumberInRange(0,pebbleGame.Y.size())));
-            }else{
-                playersPebbles.add(pebbleGame.Z.get(getRandomNumberInRange(0,pebbleGame.Z.size())));
+        int location;
+        Integer item;
+        ArrayList<Integer> bag;
+        String blackBagName;
+        String emptyBagName = "";
+
+        void getPebbles() throws Exception{ // check this works List<String> blackBags
+            ArrayList<String> blackBags = new ArrayList<String>(Arrays.asList("X","Y","Z"));
+            blackBagName = "";
+            emptyBagName = "";
+
+            System.out.println(blackBags);
+            blackBagName = blackBags.get(getRandomNumberInRange(0, blackBags.size()-1));
+            if (blackBagName == "X") {
+                bag = pebbleGame.X;
+            } else if (blackBagName == "Y") {
+                bag = pebbleGame.Y;
+            } else if (blackBagName == "Z") {
+                bag = pebbleGame.Z;
             }
-            //easy other if stateents
-            //delete item from bag
             
-            fromWhere.add(bag);
+            if (bag.size() == 0) { // works
+                System.out.println("Bag is empty " + blackBagName);
+                blackBags.remove(blackBagName);
+                System.out.println("New bags "+ blackBags);
+                emptyBagName = blackBagName;
+                blackBagName = blackBags.get(getRandomNumberInRange(0, 1));
+                System.out.println("new bag is " + blackBagName);
+                if (blackBagName == "X") {
+                    bag = pebbleGame.X;
+                } else if (blackBagName == "Y") {
+                    bag = pebbleGame.Y;
+                } else if (blackBagName == "Z") {
+                    bag = pebbleGame.Z;
+                }
+            }
+            
+            System.out.println("empty " + emptyBagName);
+
+            location = getRandomNumberInRange(0, bag.size()-1);
+            System.out.println(bag.size());
+            item = bag.get(location);//fine
+            playersPebbles.add(item);
+            bag.remove(location);
+
+            fromWhere.add(blackBagName);
+            System.out.println(blackBagName);
+
+            if (emptyBagName.isEmpty() == true) {
+                System.out.println("RUN");
+                pebbleGame.whiteBags(emptyBagName);
+            }
+            //check the other bags
+            if (pebbleGame.X.isEmpty() == true){
+                pebbleGame.whiteBags("X");
+            }else if (pebbleGame.Y.isEmpty() == true){
+                pebbleGame.whiteBags("Y");
+            }else if (pebbleGame.Z.isEmpty() == true){
+                pebbleGame.whiteBags("Z");
+            }
+            
+            System.out.println("Player " + Thread.currentThread().getId() + " has drawn a " + item + " from bag " + blackBagName);
+            System.out.println("\n");
         }
 
-        /*
-        static void removePebbles(){
+        void removePebble() {
+            location = getRandomNumberInRange(0, fromWhere.size()-1);
+            item = playersPebbles.get(location);
+            blackBagName = fromWhere.get(location);
+            
+            if (blackBagName == "X") {
+                pebbleGame.A.add(item);
+            } else if (blackBagName == "Y") {
+                pebbleGame.B.add(item);
+            } else if (blackBagName == "Z") {
+                pebbleGame.C.add(item);
+            }
+            
+            playersPebbles.remove(location);
+            fromWhere.remove(location);
+            
+            System.out.println("Player " + Thread.currentThread().getId() + " Removed item: " + item + " from bag: " + blackBagName);
 
         }
 
-        */
-        
+        @Override
+        public void run(){
+            
+            try{
+
+                if (playersPebbles.isEmpty() == true){ //works
+                    pebbleGame.givePlayersPebbles();
+                }
+
+                while (pebbleGame.checkPlayerWon() == false){
+                    removePebble();
+                    getPebbles(); //blackbags
+
+                    System.out.println("A: " + pebbleGame.A);    
+                    System.out.println("B: " + pebbleGame.B);
+                    System.out.println("C: " + pebbleGame.C);
+
+                    System.out.println("X: " + pebbleGame.X);
+                    System.out.println("Y: " + pebbleGame.Y);
+                    System.out.println("Z: " + pebbleGame.Z);
+
+                }
+
+                System.out.println("Player " + Thread.currentThread().getId() + " has won");
+            
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            
+        }
 
     }
 
     public static void main(String[] args) throws Exception {
-        // create threads here
-        pebbleGame.createBlackBags();
+        pebbleGame.loadGame(); // test with other stuff once we have the rest working
 
+        int noPlayers = 1;
+        for (int i=0; i < noPlayers ; i++){ //change to pebbleGame.noPlayers
+            player object = new player();
+            object.start();
+            object.join();  //method if it is called on any thread it will wait until the thread on which it is called terminates
+        }
+        
+        
     }
 
 }
