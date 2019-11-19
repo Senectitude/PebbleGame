@@ -22,46 +22,6 @@ public class PebbleGame {
         static ArrayList<Integer> B = new ArrayList<Integer>();
         static ArrayList<Integer> C = new ArrayList<Integer>();
 
-        // for testing
-        static void loadGame(){
-            X.add(1);
-            X.add(2);
-            X.add(3);
-            X.add(4);
-            X.add(5);
-            X.add(6);
-            X.add(7);
-            X.add(8);
-            X.add(9);
-            X.add(10);
-            X.add(11);
-
-            Y.add(1);
-            Y.add(2);
-            Y.add(3);
-            Y.add(4);
-            Y.add(5);
-            Y.add(6);
-            Y.add(7);
-            Y.add(8);
-            Y.add(9);
-            Y.add(10);
-            Y.add(11);
-
-            Z.add(1);
-            Z.add(2);
-            Z.add(3);
-            Z.add(4);
-            Z.add(5);
-            Z.add(6);
-            Z.add(7);
-            Z.add(8);
-            Z.add(9);
-            Z.add(10);
-            Z.add(11);
-        }
-
-        /*
         static void loadGame() {
             // initailse the scanner
             Scanner in = new Scanner(System.in);
@@ -96,7 +56,6 @@ public class PebbleGame {
                 
             in.close();
         }
-        */
 
         static void whiteBags(String emptyBagName) {
             ArrayList<Integer> sisterBag;
@@ -143,8 +102,8 @@ public class PebbleGame {
         }
         
         static boolean checkPlayerWon() {
-            int sum = 0;
-            for (int i : player.playersPebbles){
+            Integer sum = 0;
+            for (Integer i : player.playersPebbles){
                 sum += i;
             }
             if (sum == 100 && player.playersPebbles.size() == 10){
@@ -326,8 +285,7 @@ public class PebbleGame {
     public static void main(String[] args) throws Exception {
         pebbleGame.loadGame(); // test with other stuff once we have the rest working
 
-        int noPlayers = 1;
-        for (int i=0; i < noPlayers ; i++){ //change to pebbleGame.noPlayers
+        for (int i=0; i < pebbleGame.noPlayers; i++){ //change to pebbleGame.noPlayers
             player object = new player();
             object.start();
             object.join();  //method if it is called on any thread it will wait until the thread on which it is called terminates
