@@ -6,10 +6,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 /**
  * This class includes nested classes for the player and the game
  * 
@@ -49,7 +46,7 @@ public class PebbleGame {
 
             // initailse the scanner
             Scanner in = new Scanner(System.in);
-
+            System.out.println("Welcome to the PebbleGame!!\nYou will be asked to enter the number of players\nand then for the location of three files in turn containing comma seperated integer values for the pebble weights.\nThe integer values must be strictly positive.\nThe game will then be simulated, and output written to files in this directory\n");
             // This will end when the number of players entered is greater than 0 
             while (noPlayers == 0) { 
 
@@ -434,7 +431,10 @@ public class PebbleGame {
 
                 //System.out.println("Hand: " + playersPebbles);
                 //System.out.println("Player " + Thread.currentThread().getId() + " has won");
-                // File. write
+                String nameOfFile = String.format("Player%s_output.txt", (Thread.currentThread().getId()-11) );
+                BufferedWriter writer = new BufferedWriter(new FileWriter(nameOfFile, true));
+                writer.write("Player " + (Thread.currentThread().getId()-11) + " has won");
+                writer.close();
                 System.exit(0);
             
             } catch (Exception e) {
