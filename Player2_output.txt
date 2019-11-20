@@ -1,0 +1,44 @@
+Player 2 has discarded 1 to bag A
+Player 2 hand is [13, 5, 2, 17, 14, 14, 12, 14, 15]
+Player 2 has drawn a 14 from bag Y
+Player 2 hand is [13, 5, 2, 17, 14, 14, 12, 14, 15, 14]
+Player 2 has discarded 15 to bag A
+Player 2 hand is [13, 5, 2, 17, 14, 14, 12, 14, 14]
+Player 2 has drawn a 20 from bag X
+Player 2 hand is [13, 5, 2, 17, 14, 14, 12, 14, 14, 20]
+Player 2 has discarded 13 to bag A
+Player 2 hand is [5, 2, 17, 14, 14, 12, 14, 14, 20]
+Player 2 has drawn a 18 from bag X
+Player 2 hand is [5, 2, 17, 14, 14, 12, 14, 14, 20, 18]
+Player 2 has discarded 14 to bag A
+Player 2 hand is [5, 2, 17, 14, 12, 14, 14, 20, 18]
+Player 2 has drawn a 9 from bag Y
+Player 2 hand is [5, 2, 17, 14, 12, 14, 14, 20, 18, 9]
+Player 2 has discarded 14 to bag A
+Player 2 hand is [5, 2, 17, 14, 12, 14, 20, 18, 9]
+Player 2 has drawn a 12 from bag Y
+Player 2 hand is [5, 2, 17, 14, 12, 14, 20, 18, 9, 12]
+Player 2 has discarded 18 to bag A
+Player 2 hand is [5, 2, 17, 14, 12, 14, 20, 9, 12]
+Player 2 has drawn a 5 from bag X
+Player 2 hand is [5, 2, 17, 14, 12, 14, 20, 9, 12, 5]
+Player 2 has discarded 5 to bag A
+Player 2 hand is [5, 2, 17, 14, 12, 14, 20, 9, 12]
+Player 2 has drawn a 18 from bag Y
+Player 2 hand is [5, 2, 17, 14, 12, 14, 20, 9, 12, 18]
+Player 2 has discarded 14 to bag B
+Player 2 hand is [5, 2, 17, 14, 12, 20, 9, 12, 18]
+Player 2 has drawn a 14 from bag Y
+Player 2 hand is [5, 2, 17, 14, 12, 20, 9, 12, 18, 14]
+Player 2 has discarded 20 to bag A
+Player 2 hand is [5, 2, 17, 14, 12, 9, 12, 18, 14]
+Player 2 has drawn a 18 from bag Z
+Player 2 hand is [5, 2, 17, 14, 12, 9, 12, 18, 14, 18]
+Player 2 has discarded 14 to bag A
+Player 2 hand is [5, 2, 17, 12, 9, 12, 18, 14, 18]
+Player 2 has drawn a 18 from bag Z
+Player 2 hand is [5, 2, 17, 12, 9, 12, 18, 14, 18, 18]
+Player 2 has discarded 12 to bag A
+Player 2 hand is [5, 2, 17, 9, 12, 18, 14, 18, 18]
+Player 2 has drawn a 19 from bag X
+Player 2 hand is [5, 2, 17, 9, 12, 18, 14, 18, 18, 19]

@@ -1,0 +1,48 @@
+Player 3 has discarded 5 to bag A
+Player 3 hand is [8, 12, 6, 7, 2, 18, 2, 15, 10]
+Player 3 has drawn a 18 from bag Z
+Player 3 hand is [8, 12, 6, 7, 2, 18, 2, 15, 10, 18]
+Player 3 has discarded 2 to bag A
+Player 3 hand is [8, 12, 6, 7, 18, 2, 15, 10, 18]
+Player 3 has drawn a 16 from bag Y
+Player 3 hand is [8, 12, 6, 7, 18, 2, 15, 10, 18, 16]
+Player 3 has discarded 8 to bag A
+Player 3 hand is [12, 6, 7, 18, 2, 15, 10, 18, 16]
+Player 3 has drawn a 5 from bag Y
+Player 3 hand is [12, 6, 7, 18, 2, 15, 10, 18, 16, 5]
+Player 3 has discarded 12 to bag A
+Player 3 hand is [6, 7, 18, 2, 15, 10, 18, 16, 5]
+Player 3 has drawn a 2 from bag Z
+Player 3 hand is [6, 7, 18, 2, 15, 10, 18, 16, 5, 2]
+Player 3 has discarded 7 to bag A
+Player 3 hand is [6, 18, 2, 15, 10, 18, 16, 5, 2]
+Player 3 has drawn a 13 from bag Y
+Player 3 hand is [6, 18, 2, 15, 10, 18, 16, 5, 2, 13]
+Player 3 has discarded 5 to bag B
+Player 3 hand is [6, 18, 2, 15, 10, 18, 16, 2, 13]
+Player 3 has drawn a 1 from bag Z
+Player 3 hand is [6, 18, 2, 15, 10, 18, 16, 2, 13, 1]
+Player 3 has discarded 10 to bag A
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 13, 1]
+Player 3 has drawn a 2 from bag Y
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 13, 1, 2]
+Player 3 has discarded 1 to bag C
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 13, 2]
+Player 3 has drawn a 12 from bag Y
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 13, 2, 12]
+Player 3 has discarded 12 to bag B
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 13, 2]
+Player 3 has drawn a 9 from bag X
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 13, 2, 9]
+Player 3 has discarded 13 to bag B
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 2, 9]
+Player 3 has drawn a 15 from bag Z
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 2, 9, 15]
+Player 3 has discarded 15 to bag C
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 2, 9]
+Player 3 has drawn a 13 from bag Z
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 2, 9, 13]
+Player 3 has discarded 13 to bag C
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 2, 9]
+Player 3 has drawn a 12 from bag Y
+Player 3 hand is [6, 18, 2, 15, 18, 16, 2, 2, 9, 12]
