@@ -288,7 +288,7 @@ public class PebbleGame {
         for (int i=0; i < pebbleGame.noPlayers; i++){ //change to pebbleGame.noPlayers
             player object = new player();
             object.start();
-            object.join();  //method if it is called on any thread it will wait until the thread on which it is called terminates
+            //object.join();  //method if it is called on any thread it will wait until the thread on which it is called terminates
         }
         
         
