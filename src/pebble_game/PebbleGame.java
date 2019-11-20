@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 
 public class PebbleGame {
     static Random rand = new Random();
+    static Object lock = new Object();
     /*
         This class stores the methods ..
     */
@@ -79,11 +80,7 @@ public class PebbleGame {
             }
             sisterBag.clear();
         }
-
-       
-        
-
-        
+     
     }
 
 
@@ -132,7 +129,7 @@ public class PebbleGame {
 
         void givePlayersPebbles() throws Exception {
             List<String> blackBags = Arrays.asList("X","Y","Z");
-            ArrayList<Integer> bag;
+            ArrayList<Integer> bag = null;
             String blackBagName;
             if (playersPebbles.size() == 10){
                 return;
@@ -145,9 +142,8 @@ public class PebbleGame {
                         bag = pebbleGame.Y;
                     } else if (blackBagName == "Z") {
                         bag = pebbleGame.Z;
-                    } else {
-                        throw new Exception("Error");
-                    }
+                    } 
+
                     for (int i=0; i < 10; i++){
                         int location = rand.nextInt(bag.size());
                         Integer item = bag.get(location);
@@ -187,26 +183,6 @@ public class PebbleGame {
                 bag = pebbleGame.Z;
             }
             
-            if (bag.size() == 0) { // works
-                System.out.println("Bag is empty " + blackBagName);
-                blackBags.remove(blackBagName);
-                System.out.println("New bags "+ blackBags);
-                emptyBagName = blackBagName;
-                blackBagName = blackBags.get(rand.nextInt(2));
-                System.out.println("new bag is " + blackBagName);
-                if (blackBagName == "X") {
-                    bag = pebbleGame.X;
-                } else if (blackBagName == "Y") {
-                    bag = pebbleGame.Y;
-                } else if (blackBagName == "Z") {
-                    bag = pebbleGame.Z;
-                }else {
-                    throw new Exception("Error");
-                }
-            }
-            
-            System.out.println("empty " + emptyBagName);
-
             location = rand.nextInt(bag.size());
             System.out.println(bag.size());
             item = bag.get(location);//fine
@@ -216,19 +192,8 @@ public class PebbleGame {
             fromWhere.add(blackBagName);
             System.out.println(blackBagName);
 
-            if (emptyBagName.isEmpty() == true) {
-                System.out.println("RUN");
-                pebbleGame.whiteBags(emptyBagName);
-            }
-            //check the other bags
-            if (pebbleGame.X.size() == 0){
-                pebbleGame.whiteBags("X");
-            }
-            if (pebbleGame.Y.size() == 0){
-                pebbleGame.whiteBags("Y");
-            }
-            if (pebbleGame.Z.size() == 0){
-                pebbleGame.whiteBags("Z");
+            if (bag.size() == 0) { // works
+                pebbleGame.whiteBags(blackBagName);
             }
             
             System.out.println("Player " + Thread.currentThread().getId() + " has drawn a " + item + " from bag " + blackBagName);
@@ -266,21 +231,12 @@ public class PebbleGame {
                 }
 
                 while (checkPlayerWon() == false){
-                    removePebble();
-                    getPebbles();
-
-                    System.out.println("A: " + pebbleGame.A);    
-                    System.out.println("B: " + pebbleGame.B);
-                    System.out.println("C: " + pebbleGame.C);
-
-                    System.out.println("X: " + pebbleGame.X);
-                    System.out.println("Y: " + pebbleGame.Y);
-                    System.out.println("Z: " + pebbleGame.Z);
-                    try{
-                        Thread.sleep(1000);
-                    } catch (Exception e){
-                        System.out.println(e);
+                    synchronized(lock) {
+                        removePebble();
+                        getPebbles();
+                        lock.notifyAll();
                     }
+
                 }
                 System.out.println("Hand: " + playersPebbles);
                 System.out.println("Player " + Thread.currentThread().getId() + " has won");
