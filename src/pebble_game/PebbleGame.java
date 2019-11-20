@@ -5,31 +5,47 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-
+/**
+ * This class includes nested classes for the player and the game
+ * 
+ */
 public class PebbleGame {
+    /**
+     * Here we store two static variables,
+     * rand stores a method to get a new random number inside a range
+     * lock is used to make other threads wait until the current thread has finished
+     */
     static Random rand = new Random();
     static Object lock = new Object();
+
     /*
-        This class stores the methods ..
+        This class stores the methods that create the pebble game. 
+        It also stores the bags that are needed thoughout the game
     */
     public static class pebbleGame {
-    /*this class basically starts the game, initializes bags and loads them*/
         
+        //Number of players
         static int noPlayers;
 
+        //Black bag arrays
         static ArrayList<Integer> X = new ArrayList<Integer>();
         static ArrayList<Integer> Y = new ArrayList<Integer>();
         static ArrayList<Integer> Z = new ArrayList<Integer>();
 
+        //White bag arrays
         static ArrayList<Integer> A = new ArrayList<Integer>();
         static ArrayList<Integer> B = new ArrayList<Integer>();
         static ArrayList<Integer> C = new ArrayList<Integer>();
 
+        /**
+         * Gives the black bags values and requests the number of players
+         */
         static void loadGame() {
+
             // initailse the scanner
             Scanner in = new Scanner(System.in);
 
-            while (noPlayers == 0) {
+            while (noPlayers == 0) { 
                 while(true){
                     System.out.println("Please enter the number of players: ");
                     noPlayers = in.nextInt();
@@ -84,7 +100,7 @@ public class PebbleGame {
     }
 
 
-    private static ArrayList<Integer> loadBlackBags(ArrayList<Integer> list, Integer noPlayers, String list2) { //works 
+    public static ArrayList<Integer> loadBlackBags(ArrayList<Integer> list, Integer noPlayers, String list2) { //works 
         Integer[] weights = getWeights(list2);
         for (int i = 0; i < (noPlayers * 11); i++) {
             list.add(weights[rand.nextInt(weights.length)]);
@@ -92,7 +108,7 @@ public class PebbleGame {
         return list;
     }
 
-    private static Integer[] getWeights(String fileName) { //works
+    public static Integer[] getWeights(String fileName) { //works
         ArrayList<Integer> weights = new ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -168,49 +184,65 @@ public class PebbleGame {
             return false;
         }
 
-        void getPebbles() throws Exception{ // check this works List<String> blackBags
+        void getPebbles() throws Exception{ 
+
             ArrayList<String> blackBags = new ArrayList<String>(Arrays.asList("X","Y","Z"));
             blackBagName = "";
             emptyBagName = "";
 
             System.out.println(blackBags);
             blackBagName = blackBags.get(rand.nextInt(3));
+
             if (blackBagName == "X") {
+
                 bag = pebbleGame.X;
+
             } else if (blackBagName == "Y") {
+
                 bag = pebbleGame.Y;
+
             } else {
+
                 bag = pebbleGame.Z;
+
             }
             
             location = rand.nextInt(bag.size());
             System.out.println(bag.size());
-            item = bag.get(location);//fine
+            item = bag.get(location);
             playersPebbles.add(item);
             bag.remove(location);
 
             fromWhere.add(blackBagName);
             System.out.println(blackBagName);
 
-            if (bag.size() == 0) { // works
+            if (bag.size() == 0) {
                 pebbleGame.whiteBags(blackBagName);
             }
             
             System.out.println("Player " + Thread.currentThread().getId() + " has drawn a " + item + " from bag " + blackBagName);
             System.out.println("\n");
+
         }
 
         void removePebble() {
+
             location = rand.nextInt(fromWhere.size());
             item = playersPebbles.get(location);
             blackBagName = fromWhere.get(location);
             
             if (blackBagName == "X") {
+
                 pebbleGame.A.add(item);
+
             } else if (blackBagName == "Y") {
+
                 pebbleGame.B.add(item);
+
             } else {
-                pebbleGame.C.add(item); // doesn't work
+
+                pebbleGame.C.add(item); 
+
             }
             
             playersPebbles.remove(location);
@@ -225,12 +257,13 @@ public class PebbleGame {
             
             try{
 
-                if (playersPebbles.isEmpty() == true){ //works
+                if (playersPebbles.isEmpty() == true){ 
                     givePlayersPebbles();
                     System.out.println("Player "+ Thread.currentThread().getId() + " Hand is "+ playersPebbles);
                 }
 
                 while (checkPlayerWon() == false){
+
                     synchronized(lock) {
                         removePebble();
                         getPebbles();
@@ -238,12 +271,15 @@ public class PebbleGame {
                     }
 
                 }
+
                 System.out.println("Hand: " + playersPebbles);
                 System.out.println("Player " + Thread.currentThread().getId() + " has won");
                 System.exit(0);
             
             } catch (Exception e) {
+
                 System.out.println(e);
+
             }
             
         }
@@ -251,12 +287,14 @@ public class PebbleGame {
     }
 
     public static void main(String[] args) throws Exception {
-        pebbleGame.loadGame(); // test with other stuff once we have the rest working
 
-        for (int i=0; i < pebbleGame.noPlayers; i++){ //change to pebbleGame.noPlayers
+        pebbleGame.loadGame(); 
+
+        for (int i=0; i < pebbleGame.noPlayers; i++){ 
+
             Player object = new Player();
             object.start();
-            //object.join();  //method if it is called on any thread it will wait until the thread on which it is called terminates
+
         }
         
         
